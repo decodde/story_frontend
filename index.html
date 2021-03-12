@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./story.css">
+    <script type="text/javascript" src="story.js"></script>
+   
+    <title>story</title>
+</head>
+
+<body>
+    <div id="home" class="hide page">
+        <div class="home-top-bg-image">
+
+        </div>
+
+        <div class="header-text">
+            <p class="abril-text-bold green-text">Good </p>
+            <p class="abril-text-bold green-text"> Afternoon,</p>
+            <p id="homeUsername" class="abril-text-bold margin-1 dark-text">  </p>
+        </div>
+        <br>
+        <div class="home-search-control hor-center search">
+            <img style="margin-right: 8px;" src="gr.svg">
+            <input class="dark-text vert-center avenir-text-roman " type="search" placeholder="Search for Books">
+        </div>
+        <br>
+        <div class="margin-1-all">
+            <span style="float:left;font-size: 20px" class="abril-d-text-bold"> New Arrivals</span>
+            <span style="font-size: 13px ;float:right" class="abril-d-text-bold pink-text"> View all &nbsp; > </span>
+        </div>
+        <div class="" id="newArrivals">
+            <div class="book-container">
+                <div style="background: url('tfa.jpg') !important; background-size: cover !important;" class="bg-abstract book-card" >
+                </div>
+                <p class="abril-text-regular na-title">Things Fall Apart</p>
+                <p class="avenir-text-roman na-author">Chinua Achebe</p>
+            </div>
+            <div class="book-container">
+                <div class="book-card">
+                </div>
+                <p class="abril-text-regular na-title">Lagoon</p>
+                <p class="avenir-text-roman na-author">Nnedi Okafor</p>
+            </div>
+            <div class="book-container">
+                <div class="bg-abstract book-card">
+                </div>
+                <p class="abril-text-regular na-title">A Particular Kind of Black Man</p>
+                <p class="avenir-text-roman na-author">Tope Folarin</p>
+            </div>
+            <div class="book-container">
+                <div class="book-card">
+                </div>
+                <p class="abril-text-regular na-title">Children of Blood and Bone</p>
+                <p class="avenir-text-roman na-author">Tomi Adeyemi</p>
+            </div>
+
+
+        </div>
+        <br>
+        <br>
+        <div>
+            <p style= "font-size: 20px;" class = "abril-d-text-bold"> Recently Read </p>
+            <div class="" id="recentRead">
+                <div class="book-container">
+                    <div style="background: url('tfa.jpg') !important; background-size: cover !important;" class="bg-abstract book-card" >
+                    </div>
+                    <p class="abril-text-regular na-title">Things Fall Apart</p>
+                    <p class="avenir-text-roman na-author">Chinua Achebe</p>
+                </div>
+                <div class="book-container">
+                    <div class="book-card abstract-1">
+                    </div>
+                    <p class="abril-text-regular na-title">Lagoon</p>
+                    <p class="avenir-text-roman na-author">Nnedi Okafor</p>
+                </div>    
+    
+            </div>
+        </div>
+        <br>
+        <div>
+            <p style= "font-size: 20px;" class = "abril-d-text-bold"> Your Stories </p>
+            <div class="" id="myHomeStories">
+                
+            </div>
+            <div id="storyLogin" class="bg-pink">
+                <span onclick = "(async () => (await eStory.this.loggedIn) ? await eStory.switchView.login() : eStory.notify('error','You have to be a user before you can create a story', eStory.switchView.login))()" class="avenir-text-black white-text center-text">create a story</span>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+
+    </div>
+
+
+    <!-- BOOK DETAILS ------>
+    <div id="bookDetail" class="hide page">
+        <div >
+            <img src="">
+            <p id="bookDetailText" class="center-text abril-text-bold">Book Detail</p>
+            <img src="">
+        </div>
+        <div id="bookDetailContainer" class="">
+            <div id="bookDetail"  class="hor-center book-card green-shadow "  style="background: url('tfa.jpg');">
+            </div>
+            <p id="bookDetailTitle" class ="center-text abril-text-bold">Things Fall Apart</p>
+            <p id="bookDetailAuthor" class="center-text dark-text avenir-text-roman ">Chinua Achebe</p>
+            <p id ="bookDetailSummary" class="center-text dark-text avenir-text-roman">Okonkwo, is famous in the villages of Umuofia for being a wrestling champion, defeating a wrestler nicknamed "Amalinze The Cat" (because he never lands on his back). Okonkwo is strong, hard-working, and strives to show no weakness. He wants to dispel his father Unoka's tainted legacy of unpaid debts, a neglected wife and children, and cowardice at the sight of blood. Okonkwo works to build his wealth entirely on his own, as Unoka died a shameful death and left many unpaid debts. He is also obsessed with his masculinity, and any slight compromise to this is swiftly destroyed. As a result, he often beats his wives and children, and is unkind to his neighbours. However, his drive to escape the legacy of his father leads him to be wealthy, courageous, and powerful among the people of his village. He is a leader of his village, having attained a position in his society for which he has striven all his life.
+            </p>
+            <br>
+            <div id="bookDetailReadingContainer" class="vert-center-2">
+                <span class ="left-text avenir-text-black">Reading  </span>
+                <span class="vert-center-2 margin-1-all">
+                    <img src="abstract-1.png" height="40px" width="40px" class="img-stack img-circle">
+                    <img src="abstract-2.jpg" height="40px" width="40px" class="img-stack img-circle">
+                    <img src="abstract-2.jpg" height="40px" width="40px" class="img-stack img-circle">
+                    <span class="avenir-text-black vert-center-2" id="bookDetailReadingAmount">+5</span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!--SIGNUP-->
+    <div id = "signup" class="hide page">
+        <p style="font-size:25px" class="abril-text-bold center-text">Signup</p>
+        <br>
+        <div>
+            <div class="form-group form-pink-border">
+                <p class="avenir-text-black dark-text form-label">Full name</p>
+                <input required class="avenir-text-roman form-input" id="signupName" type = "text" placeholder="name">
+            </div>
+            <br>
+            <div class="form-group form-pink-border">
+                <p class="avenir-text-black dark-text form-label">@username</p>
+                <input required class="avenir-text-roman form-input" id="signupUsername" type = "text" placeholder="@username">
+            </div>
+            <br>
+            <div class="form-group form-pink-border">
+                <p class="avenir-text-black dark-text form-label">Email address</p>
+                <input required class="avenir-text-roman form-input" id="signupEmailAddress" type = "email" placeholder="email address">
+            </div>
+            <br>
+            <div class="form-group form-pink-border">
+                <p class="avenir-text-black dark-text form-label">Password</p>
+                <input required class="avenir-text-roman form-input" id="signupPassword" type = "password" placeholder="password">
+            </div>
+            <br>
+            <div class="form-group form-pink-border">
+                <p class="avenir-text-black dark-text form-label">Confirm password</p>
+                <input required class="avenir-text-roman form-input" id="signupConfirmPassword" type = "password" placeholder="confirm password">
+            </div>
+            <br>
+            <button type="submit" id="signupBtn" class="bg-green hor-center form-button white-text avenir-text-black" > signup</button>
+            <br>
+            <a  style="font-size: 20px;" href="javascript:eStory.switchView.login()" class="pink-text center-text hor-center"> Or login</a>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <!---LOGIN-->
+    <div id="login" class="hide  page">
+        <p style="font-size:25px" class="abril-text-bold center-text">Login</p>
+        <br>
+        <div>
+            <div class="form-group form-green-border">
+                <p class="avenir-text-black dark-text form-label ">@username or email</p>
+                <input required class="avenir-text-roman form-input" id="loginUsername" type = "text" placeholder="@username or email">
+            </div>
+            <br>
+            <div class="form-group form-green-border">
+                <p class="avenir-text-black dark-text form-label">password</p>
+                <input required class="avenir-text-roman form-input" id="loginPassword" type = "password" placeholder="password">
+            </div>
+            <br>
+            <br>
+            <button type="submit" id="signupBtn" class="bg-pink hor-center form-button white-text avenir-text-black" > login</button>
+            <br>
+            <a style="font-size: 20px;" href="javascript:eStory.switchView.signup()" class="green-text center-text hor-center"> Or signup</a>
+        </div>
+    </div>
+
+    <!--FOOTER NAVIGATION-->
+    <div class="footer-navigation" >
+        <div onclick="eStory.switchView.home()">
+            <img height="30px" class="hor-center" width="30px" src="home-2.png" >
+        </div>
+        <div onclick="eStory.switchView.library()">
+            <img height="30px" class="hor-center" width="30px" src="book.png" >
+        </div>
+        <div>
+            <img height="30px" class="img-circle hor-center" width="30px" src="abstract-2.jpg" >
+        </div>
+        <div onclick="eStory.switchView.settings()">
+            <img height="30px" class="hor-center" width="30px" src="settings-1.png" >
+        </div>
+        
+        
+    </div>
+</body>
+<script type = "text/javascript">
+    eStory.start()
+</script>
+</html>

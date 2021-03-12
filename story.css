@@ -1,0 +1,422 @@
+/*
+    GREEN - #28D063
+    DARK - #34334B
+    PINK - #FD8369
+    WhITE - #F3F5F9
+*/
+:root{
+    --green : #28D063;
+    --dark : #34334B;
+    --pink : #FD8369;
+    --white : #F3F5F9;
+}
+
+@font-face {
+    font-family: AvenirBlack;
+    src: url("./fonts/AvenirBlack.otf");
+}
+@font-face {
+    font-family: AvenirBook;
+    src: url("./fonts/AvenirBook.otf");
+}
+@font-face {
+    font-family: AvenirRoman;
+    src: url("./fonts/AvenirRoman.otf");
+
+}
+
+@font-face {
+    font-family: AbrilBold;
+    src: url("./fonts/AbrilBold.otf");
+
+}
+@font-face {
+    font-family: AbrilRegular;
+    src: url("./fonts/AbrilRegular.otf");
+}
+@font-face {
+    font-family: AbrilItalic;
+    src: url("./fonts/AbrilItalic.otf");
+
+}
+@font-face {
+    font-family: AbrilDBold;
+    src: url("./fonts/AbrilDBold.otf");
+
+}
+@font-face {
+    font-family: AbrilDRegular;
+    src: url("./fonts/AbrilDRegular.otf");
+}
+@font-face {
+    font-family: AbrilDItalic;
+    src: url("./fonts/AbrilDItalic.otf");
+
+}
+
+/******************font****************/
+.avenir-text-black{
+    font-family: AvenirBlack;
+}
+.avenir-text-book{
+    font-family: AvenirBook;
+}
+.avenir-text-roman{
+    font-family: AvenirRoman;
+}
+.abril-text-regular{
+    font-family: AbrilRegular;
+}
+.abril-text-italic{
+    font-family: AbrilItalic;
+}
+.abril-text-bold{
+    font-family: AbrilBold;
+}
+.abril-d-text-regular{
+    font-family: AbrilDRegular;
+}
+.abril-d-text-italic{
+    font-family: AbrilDItalic;
+}
+.abril-d-text-bold{
+    font-family: AbrilDBold;
+}
+
+/*
+///////////////////////////////////
+//////////////////TEXT//////////////
+*/
+.green-text{
+    color : var(--green);
+}
+
+.dark-text{
+    color : var(--dark);
+}
+
+.pink-text{
+    color : var(--pink);
+}
+
+.white-text{
+    color : var(--white);
+}
+
+
+/************************************************
+/////////////////////////////////////////////////
+/////////-  HOME - ////////////////////////////*/
+.home-top-bg-image{
+    position: absolute;
+    height : 300px;
+    width : 100%;
+    background-position:top right 10px;
+    background-repeat: no-repeat;
+    background-image: url("gr.svg");
+    background-size: 60% 60%;
+    background-attachment: scroll;
+    margin-top : 0px !important;
+}
+
+.home-search-control{
+    padding:5px;
+    padding-left :15px;
+    border : none;
+    border-radius: 13px;
+    position: relative;
+    width : calc(100% - 25px);
+    box-shadow : 0px 2px 25px -15px var(--dark);
+    background-color: white;
+}
+
+.home-search-control > img  {
+    width :20px;
+}
+
+.home-search-control > input  {
+    border: none;
+    padding: 5px;
+}
+.home-search-control > input:focus  {
+    outline:none
+}
+.home-search-control > input::placeholder  {
+    color : var(--white)
+}
+
+#recentRead {
+    width : 110%;
+    overflow: auto;
+    white-space: nowrap;
+}
+#recentRead .book-container{
+    display: inline-block;
+}
+
+#storyLogin{
+    border-radius: 20px;
+    padding:10px;
+    font-size : 20px;
+    box-shadow: 0px 1px 40px -10px var(--pink);
+}
+
+#myHomeStories{
+    width : 110%;
+    overflow: auto;
+    white-space: nowrap;
+}
+#myHomeStories .book-container{
+    display: inline-block;
+}
+
+
+#newArrivals{
+    margin-top:50px;
+    width : 110%;
+    overflow: auto;
+    white-space: nowrap;
+}
+#newArrivals .book-container {
+    display: inline-block;
+}
+.na-author{
+    opacity: 0.3;
+    font-size: 12px ;
+    margin-top: 5px;
+    margin :3px;
+}
+.na-title{
+    opacity : 0.8;
+    font-size: 15px;
+    margin:3px;
+    margin-top: 10px;
+}
+/*////////////////////////////////////////////////////////////
+//////////////////////BORDER ///////////////////////////////*/
+.form-green-border{
+    border : 2px solid var(--green);
+    box-shadow: 0px 2px 11px -7px var(--green);
+}
+.form-pink-border{
+    border : 2px solid var(--pink);
+    box-shadow: 0px 2px 11px -7px var(--pink);
+}
+.form-dark-border{
+    border : 2px solid var(--dark);
+    box-shadow: 0px 2px 11px -7px var(--dark);
+}
+
+
+/*???????????????????????????////////////////////////////
+////////// FORM ///////////////////////////////////////*/
+.form-label{
+    font-size:20px;
+    margin :5px;
+}
+.form-group{
+    padding: 10px;
+    border-radius: 20px;
+}
+.form-input{
+    border:none;
+    width:calc(100% - 20px);
+    background: white;
+    padding:10px;
+    border-radius: 20px;
+}
+.form-input:focus{
+    outline: none;
+    border : 1px solid rgba(72, 72, 72, 0.53)
+}
+
+.form-button{
+    border:none;
+    border-radius: 15px;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+#signupBtn{
+    font-size: 20px;
+}
+/*///////////////////////////////////////////////////////////
+////////////////////////////////
+
+///////////FOOTER NAVIGATION ////////////////////////////*/
+.footer-navigation{
+    position:fixed;
+    bottom : 10px;
+    width : calc(100% - 45px);
+    background-color: white;
+    border-radius: 25px;
+    padding: 15px;
+    padding-bottom:0px
+}
+.footer-navigation div{
+    width:calc(25% - 3px);
+    display : inline-block;    
+}
+    
+
+   
+.active-nav{
+
+}
+/******************************//*
+//////////////////////////////
+/*******************************/
+body{
+
+}
+.hide{
+    display : none;
+}
+.show{display: inherit;}
+.book-container{
+    margin : 10px;
+}
+.bg-abstract{
+    background-image: url(abstract-1.png) !important;
+    background-position-x: 160px !important;
+    background-position-y: 220px !important;
+}
+.book-card{
+    border-radius:10px;
+    width : 110px;
+    height: 150px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-image: url(abstract-2.jpg);
+
+    background-position-x: 160px;
+    background-position-y: 220px;
+    box-shadow : 0px 12px 33px -19px var(--dark);  
+}
+
+
+/*********************************
+//////////////////////////////////////////////
+////////// BOOO DETAIL   //////////////
+//////////////////////////////////////////////*/
+#bookDetailContainer{
+    background-color: transparent;
+}
+#bookDetailText{
+    font-size: 20px;
+}
+#bookDetailTitle{
+    font-size: 25px;
+    font-weight: 300;
+    margin :3px;
+    margin-top: 15px;
+}
+#bookDetailAuthor{
+    opacity : 0.8;
+}
+#bookDetailSummary{
+    opacity : 0.5;
+    overflow:hidden;
+    max-width:100%;
+    height:100px;
+    text-align: center;
+    white-space: normal;
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+}
+#bookDetailReadingContainer{
+    height: 40px;
+    border : 2px solid var(--dark)  ;
+    border-radius : 20px;
+    padding: 10px;
+    font-size: 17px;
+}
+#bookDetailReadingContainer span{
+    margin: 10px;
+}
+
+/*//////////////////////////
+////////////////////////////////*/
+.img-stack{
+    margin : -3px;
+}
+.img-circle {
+    border-radius: 50%;
+    box-shadow: 0px 4px 20px -10px var(--dark);
+}
+.green-shadow{
+    box-shadow: 5px 10px 220px -10px var(--green);
+}
+.center-text{
+    text-align: center;
+}
+.left-text{
+    text-align: left;
+}
+.hor-center{
+    margin:0 auto;
+    display: block;
+}
+
+.vert-center{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.vert-center-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    border-radius: 10px;
+    background-color: var(--white);
+    position: absolute;
+    padding:25px;
+    width: calc(100% - 65px);
+    height: calc(100% - 90px);  
+    margin-bottom: 20px;
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    text-align:justify; 
+}
+.default-text{
+    font-family: 'Times New Roman', Times, serif}
+
+.header-text{
+    margin-top : 80px !important;
+    font-size : 20px;
+    font-weight: bold;
+
+}
+.margin-0{
+    margin : 0px !important;
+}
+.margin-1{
+    margin-top:5px !important;
+    margin-bottom:5px !important;
+}
+.margin-1-all{
+    margin:5px !important;
+}
+.header-text>p{
+    margin :0px
+}
+
+.bg-white{
+    background-color:  var(--white);
+}
+
+.bg-black{
+    background-color: var(--dark);
+}
+
+.bg-green{
+    background-color: var(--green);
+}
+
+.bg-pink{
+    background-color: var(--pink);
+}
