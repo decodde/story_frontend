@@ -278,8 +278,6 @@ body{
 }
 .bg-abstract{
     background-image: url(abstract-1.png) !important;
-    background-position-x: 160px !important;
-    background-position-y: 220px !important;
 }
 .book-card{
     border-radius:10px;
@@ -287,10 +285,6 @@ body{
     height: 150px;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    background-image: url(abstract-2.jpg);
-
-    background-position-x: 160px;
-    background-position-y: 220px;
     box-shadow : 0px 12px 33px -19px var(--dark);  
 }
 

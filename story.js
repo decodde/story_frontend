@@ -1,8 +1,10 @@
 var htmls = {
-    bookCard: async (title, author, image) => {
+    bookCard: async (body) => {
+        var {id,title,image,author,summary} = body;
+        var body_string = JSON.stringify({title : title, id : id, author : author, summary : summary});
         var default_img = //style = "background: url('tfa.jpg') !important; background-size: cover !important;";
         image ? default_img = `style="background: url(${image}) !important; background-size: cover !important;"` : "";
-        return `<div class="book-container">
+        return `<div id="${id}" onclick='eStory.app.bookDetails(${body_string})' data-storyid="${id}" class="book-container">
                     <div ${image ? default_img : ""}  class="${image ? "" : 'bg-abstract'} book-card" >
                     </div>
                     <p class="abril-text-regular na-title">${title}</p>
@@ -39,8 +41,8 @@ const eStory = {
             },
             loginForm : {
                 get : async () => {
-                    var username = await eStory._dom.id("loginUsername").value;
-                    var password = await eStory._dom.id("loginPassword").value;
+                    var username = (await eStory._dom.id("loginUsername")).value;
+                    var password = (await eStory._dom.id("loginPassword")).value;
                     return {
                         username : username,
                         password : password
@@ -63,33 +65,41 @@ const eStory = {
             },
             recentRead : {
                 render : async (data) => {
-                    (await eStory._dom.id("recentRead")).append(data);
+                    (await eStory._dom.id("recentRead")).innerHTML += data;
                 },
                 clear : async () => (await eStory._dom.id("recentRead")).innerHTML = ""
             },
             myStories : {
                 render : async (data) => {
-                    (await eStory._dom.id("myStories")).append(data);
+                    (await eStory._dom.id("myStories")).innerHTML += data;
                 },
                 clear : async () => (await eStory._dom.id("recentRead")).innerHTML = ""
             },
             newArrivals : {
                 render : async (data) => {
-                    (await eStory._dom.id("newArrivals")).append(data);
+                    (await eStory._dom.id("newArrivals")).innerHTML += data;
                 },
                 clear : async () => (await eStory._dom.id("newArrivals")).innerHTML = ""
+            },
+            bookDetails : {
+                render : async (data) => {
+                    var {title,author,id,summary} = data;
+                    (await eStory._dom.id("bookDetailTitle")).innerHTML = title;
+                    (await eStory._dom.id("bookDetailAuthor")).innerHTML = author;
+                    (await eStory._dom.id("bookDetailSummary")).innerHTML = summary;
+                }
             }
         }
     },
     this: {
-        loggedIn: _db_.retrieve("eS_loggedIn"),
-        firstTime: _db_.retrieve("eS_firstTime"),
-        username: _db_.retrieve("eS_username"),
-        email: _db_.retrieve("eS_email"),
-        apiKey: _db_.retrieve("eS_apiKey"),
-        themeMode : _db_.retrieve("eS_themeMode"),
-        recentRead : _db_.retrieve("eS_recentRead"),
-        myStories : _db_.retrieve("eS_myStories")
+        loggedIn: async () => await _db_.retrieve("eS_loggedIn"),
+        firstTime:async () => await _db_.retrieve("eS_firstTime"),
+        username: async () => await _db_.retrieve("eS_username"),
+        email: async () => await _db_.retrieve("eS_email"),
+        apiKey: async () => await _db_.retrieve("eS_apiKey"),
+        themeMode : async () => await _db_.retrieve("eS_themeMode"),
+        recentRead : async () => await _db_.retrieve("eS_recentRead"),
+        myStories : async () => await _db_.retrieve("eS_myStories")
     },
     _fetch: async (url, data, auth) => {
         var opt = {
@@ -99,27 +109,50 @@ const eStory = {
                 'Authorization': ""
             }
         }
-        auth ? opt.headers['Authorization'] = await eStory.this.apiKey : "";
+        auth ? opt.headers['Authorization'] = await eStory.this.apiKey() : "";
         data ? opt.body = JSON.stringify(data) : delete opt.body;
-        var _req = await fetch(`${server}/api/${url}`, opt);
-        _req = await _req.json();
-        return _req;
+        try {
+            var _req = await fetch(`${eStory.server}/api/${url}`, opt);
+            try{
+                _req = await _req.json();
+                return _req;
+            }
+            catch(e){
+                var err = new TypeError(e)
+                console.log("Error parsing data");
+                return {
+                    type : "error",
+                    msg : "Error parsing data",
+                    data : _req.text()
+                }
+            }
+        }
+        catch(e){
+            var err = new TypeError(e)
+            console.log(err.name,err.message.split(":")[1]);
+            return {
+                type : "error",
+                msg : "Connection failed"
+            }
+        }
     },
+    server : "http://localhost:36904",
     apiCall: {
-        login: async (body) => await eStory.apiCall("login", body, false),
-        signup: async (body) => await eStory.apiCall("onboard", body, false),
+        login: async (body) => await eStory._fetch("login", body, false),
+        signup: async (body) => await eStory._fetch("onboard", body, false),
         story: {
-            get: async (id) => await eStory.apiCall("story/get", { id: id }, false),
-            create: async (body) => await eStory.apiCall("story/create", body, true),
-            delete: async (id) => await eStory.apiCall("story/delete", { id: id }, true),
-            myStories: async () => await eStory.apiCall("story/myStories", {}, true),
+            get: async (id) => await eStory._fetch("story/get", { id: id }, false),
+            create: async (body) => await eStory._fetch("story/create", body, true),
+            delete: async (id) => await eStory._fetch("story/delete", { id: id }, true),
+            newArrivals : async () => await eStory._fetch("story/newArrivals",{},false),
+            myStories: async () => await eStory._fetch("story/myStories", {}, true),
             all: {
-                light: async () => await eStory.apiCall("story/stories/all/light", {}, false),
-                detailed: async () => await eStory.apiCall("story/stories/all/detailed", {}, false),
+                light: async () => await eStory._fetch("story/stories/all/light", {}, false),
+                detailed: async () => await eStory._fetch("story/stories/all/detailed", {}, false),
             }
         },
         user: {
-            get: async (username) => await eStory.apiCall("user/get", {}, true)
+            get: async (username) => await eStory._fetch("user/get", {}, true)
         }
     },
     notify : async (type,message,next) => {
@@ -136,6 +169,9 @@ const eStory = {
         signup: async () => {
             await eStory.switchView.view("signup");
         },
+        bookDetails : async () => {
+            await eStory.switchView.view("bookDetails")
+        },
         view: async (w, close) => {
             var views = document.getElementsByClassName("page");
             for (var i = 0; i < views.length; i++) {
@@ -149,21 +185,23 @@ const eStory = {
     app : {
         loadHome : async () => {
             var user = "Guest";
-            if (["null",null].includes(await eStory.this.loggedIn)){
+            if (["null",null].includes(await eStory.this.loggedIn())){
                 console.log("Not logged in");
                 user ? user : user = "Guest";
             }
             else{
-                user = await eStory.this.username;
+                user = await eStory.this.username();
                 user ? user : user = "Guest";
             }
             await eStory._dom.component.homeUsername.set(user);
         },
         login : async () => {
             var loginBody = await eStory._dom.component.loginForm.get();
+            console.log(loginBody)
             var req = await eStory.apiCall.login(loginBody);
             if(req.type == "success"){
-                Objects.keys(req.data).forEach(key => _db_.save(key,req.data[key]));
+                //console.log(req.data);
+                Object.keys(req.data).forEach(key => _db_.save(`eS_${key}`,req.data[key]));
                 _db_.save("eS_loggedIn",true);
                 eStory.reload();
             }
@@ -183,25 +221,40 @@ const eStory = {
             }
             else {
                 /*## TODO  notify error*/
-                console.log("signup failed")
+                console.log("signup failed");
             }
         },
         recentRead : async () => {
             var _recRead = await eStory.app.recentRead;
             await eStory._dom.component.recentRead.clear();
             if (_recRead.length > 0){
-                _recRead.forEach(async r => eStory._dom.component.recentRead.render(await htmls.bookCard(r.title,r.author,r.image)));
+                _recRead.forEach(async r => eStory._dom.component.recentRead.render(await htmls.bookCard(r)));
+            }
+        },
+        newArrivals : async () => {
+            var _newarrivals = await eStory.apiCall.story.newArrivals();
+            await eStory._dom.component.newArrivals.clear();
+            if (_newarrivals.type == "success"){
+                _newarrivals.data.forEach(async book => eStory._dom.component.newArrivals.render(await htmls.bookCard(book)));
+            }
+            else{
+                console.log("No connection to fetch books");
             }
         },
         myStories : async () => {
             var _mystories = await eStory.app.myStories;
             if(_mystories.length > 0 ){
                 await eStory._dom.component.myStories.clear();
-                _mystories.forEach(async r => eStory._dom.component.myStories.render(await htmls.bookCard(r.title,r.author,r.image)));
+                _mystories.forEach(async r => eStory._dom.component.myStories.render(await htmls.bookCard(r)));
             }
             else {
 
             }
+        },
+        bookDetails : async (bookDetail) => {
+            bookDetail = JSON.parse(bookDetail);
+            await eStory._dom.component.bookDetails.render(bookDetail);
+            eStory.switchView.bookDetails();
         }
     },
     start: async () => {
@@ -212,7 +265,7 @@ const eStory = {
             new Arrivals
 
         */
-        if ([null, "null"].includes(await eStory.this.loggedIn)) {
+        if ([null, "null"].includes(await eStory.this.loggedIn())) {
             _db_.load();
             await eStory.switchView.home();
         }
@@ -229,6 +282,7 @@ const eStory = {
         await eStory.app.loadHome();
         await eStory.app.myStories();
         await eStory.app.recentRead();
+        await eStory.app.newArrivals();
         await eStory.switchView.home();
     },
     reload: async () => {

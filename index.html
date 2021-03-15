@@ -86,19 +86,17 @@
                 
             </div>
             <div id="storyLogin" class="bg-pink">
-                <span onclick = "(async () => (await eStory.this.loggedIn) ? await eStory.switchView.login() : eStory.notify('error','You have to be a user before you can create a story', eStory.switchView.login))()" class="avenir-text-black white-text center-text">create a story</span>
+                <span onclick = "(async () => (await eStory.this.loggedIn()) ? console.log('shoould switch to create story') : eStory.notify('error','You have to be a user before you can create a story', eStory.switchView.login))()" class="avenir-text-black white-text center-text">create a story</span>
             </div>
         </div>
         <br>
         <br>
         <br>
-
-
     </div>
 
 
     <!-- BOOK DETAILS ------>
-    <div id="bookDetail" class="hide page">
+    <div id="bookDetails" class="hide page">
         <div >
             <img src="">
             <p id="bookDetailText" class="center-text abril-text-bold">Book Detail</p>
@@ -164,7 +162,7 @@
     </div>
 
     <!---LOGIN-->
-    <div id="login" class="hide  page">
+    <div id="login" class="hide page">
         <p style="font-size:25px" class="abril-text-bold center-text">Login</p>
         <br>
         <div>
@@ -179,11 +177,12 @@
             </div>
             <br>
             <br>
-            <button type="submit" id="signupBtn" class="bg-pink hor-center form-button white-text avenir-text-black" > login</button>
+            <button onclick="eStory.app.login()" type="submit" id="signupBtn" class="bg-pink hor-center form-button white-text avenir-text-black" > login</button>
             <br>
             <a style="font-size: 20px;" href="javascript:eStory.switchView.signup()" class="green-text center-text hor-center"> Or signup</a>
         </div>
     </div>
+
 
     <!--FOOTER NAVIGATION-->
     <div class="footer-navigation" >
